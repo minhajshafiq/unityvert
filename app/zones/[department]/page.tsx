@@ -5,13 +5,14 @@ import Image from 'next/image'
 import type { Metadata } from 'next'
 
 interface PageProps {
-  params: {
+  params: Promise<{
     department: string
-  }
+  }>
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const dept = getDepartmentBySlug(params.department)
+  const { department } = await params
+  const dept = getDepartmentBySlug(department)
 
   if (!dept) {
     return {
@@ -39,12 +40,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       `débroussaillage ${dept.name}`,
     ],
     alternates: {
-      canonical: `https://unityvert.fr/zones/${params.department}`,
+      canonical: `https://unityvert.fr/zones/${department}`,
     },
     openGraph: {
       title,
       description,
-      url: `https://unityvert.fr/zones/${params.department}`,
+      url: `https://unityvert.fr/zones/${department}`,
       siteName: 'Unity Vert',
       locale: 'fr_FR',
       type: 'website',
@@ -72,8 +73,9 @@ export async function generateStaticParams() {
   }))
 }
 
-export default function DepartmentPage({ params }: PageProps) {
-  const dept = getDepartmentBySlug(params.department)
+export default async function DepartmentPage({ params }: PageProps) {
+  const { department } = await params
+  const dept = getDepartmentBySlug(department)
 
   if (!dept) {
     notFound()
@@ -129,14 +131,14 @@ export default function DepartmentPage({ params }: PageProps) {
             priority
           />
         </div>
-        
+
         <div className="container-custom mx-auto section-padding relative z-10">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
             Jardinier Paysagiste <br />
             <span className="text-accent">{dept.name} ({dept.code})</span>
           </h1>
           <p className="text-xl text-white/90 max-w-2xl mb-8">
-            Unity Vert intervient dans l'ensemble du département {dept.name} pour vos travaux de jardinage et d'aménagement extérieur.
+            Unity Vert intervient dans l&apos;ensemble du département {dept.name} pour vos travaux de jardinage et d&apos;aménagement extérieur.
           </p>
           <div className="flex gap-4">
             <Link
@@ -154,10 +156,10 @@ export default function DepartmentPage({ params }: PageProps) {
         <div className="container-custom mx-auto">
           <div className="max-w-3xl mx-auto text-center mb-16">
             <h2 className="text-3xl font-bold text-primary mb-6">
-              Nos zones d'intervention dans le {dept.code}
+              Nos zones d&apos;intervention dans le {dept.code}
             </h2>
             <p className="text-gray-600">
-              Notre équipe de jardiniers paysagistes professionnels se déplace dans toutes les communes du {dept.name}. 
+              Notre équipe de jardiniers paysagistes professionnels se déplace dans toutes les communes du {dept.name}.
               Retrouvez ci-dessous les principales villes où nous intervenons régulièrement.
             </p>
           </div>
@@ -181,7 +183,7 @@ export default function DepartmentPage({ params }: PageProps) {
 
           <div className="mt-12 text-center">
             <p className="text-gray-600 mb-6">
-              Votre ville n'est pas dans la liste ? Nous intervenons probablement quand même !
+              Votre ville n&apos;est pas dans la liste ? Nous intervenons probablement quand même !
             </p>
             <Link
               href="/contact"
@@ -210,7 +212,7 @@ export default function DepartmentPage({ params }: PageProps) {
             </div>
             <div className="bg-white p-6 rounded-xl shadow-sm">
               <h3 className="text-xl font-bold text-primary mb-4">Élagage</h3>
-              <p className="text-gray-600">Taille douce, élagage de sécurité et abattage d'arbres dangereux dans le {dept.code}.</p>
+              <p className="text-gray-600">Taille douce, élagage de sécurité et abattage d&apos;arbres dangereux dans le {dept.code}.</p>
             </div>
             <div className="bg-white p-6 rounded-xl shadow-sm">
               <h3 className="text-xl font-bold text-primary mb-4">Création de Jardin</h3>

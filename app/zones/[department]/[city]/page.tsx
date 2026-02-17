@@ -5,15 +5,16 @@ import Image from 'next/image'
 import type { Metadata } from 'next'
 
 interface PageProps {
-  params: {
+  params: Promise<{
     department: string
     city: string
-  }
+  }>
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const city = getCityBySlug(params.department, params.city)
-  const dept = getDepartmentBySlug(params.department)
+  const { department, city: citySlug } = await params
+  const city = getCityBySlug(department, citySlug)
+  const dept = getDepartmentBySlug(department)
 
   if (!city || !dept) {
     return {
@@ -41,12 +42,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       `jardinier ${dept.code}`,
     ],
     alternates: {
-      canonical: `https://unityvert.fr/zones/${params.department}/${params.city}`,
+      canonical: `https://unityvert.fr/zones/${department}/${citySlug}`,
     },
     openGraph: {
       title,
       description,
-      url: `https://unityvert.fr/zones/${params.department}/${params.city}`,
+      url: `https://unityvert.fr/zones/${department}/${citySlug}`,
       siteName: 'Unity Vert',
       locale: 'fr_FR',
       type: 'website',
@@ -70,7 +71,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export async function generateStaticParams() {
   const params: { department: string; city: string }[] = []
-  
+
   for (const dept of departments) {
     for (const city of dept.cities) {
       params.push({
@@ -79,13 +80,14 @@ export async function generateStaticParams() {
       })
     }
   }
-  
+
   return params
 }
 
-export default function CityPage({ params }: PageProps) {
-  const city = getCityBySlug(params.department, params.city)
-  const dept = getDepartmentBySlug(params.department)
+export default async function CityPage({ params }: PageProps) {
+  const { department, city: citySlug } = await params
+  const city = getCityBySlug(department, citySlug)
+  const dept = getDepartmentBySlug(department)
 
   if (!city || !dept) {
     notFound()
@@ -151,13 +153,13 @@ export default function CityPage({ params }: PageProps) {
             priority
           />
         </div>
-        
+
         <div className="container-custom mx-auto section-padding relative z-10">
           <div className="text-sm uppercase tracking-wider mb-4 opacity-80">
             <Link href={`/zones/${dept.slug}`} className="hover:underline">
               {dept.name}
-            </Link> 
-            {' > '} 
+            </Link>
+            {' > '}
             <span className="text-accent">{city.name}</span>
           </div>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
@@ -165,8 +167,8 @@ export default function CityPage({ params }: PageProps) {
             <span className="text-accent">{city.name} ({city.zip})</span>
           </h1>
           <p className="text-xl text-white/90 max-w-2xl mb-8">
-            Unity Vert est votre expert en jardinage et paysagisme à {city.name}. 
-            Profitez de nos services professionnels avec 50% de crédit d'impôt.
+            Unity Vert est votre expert en jardinage et paysagisme à {city.name}.
+            Profitez de nos services professionnels avec 50% de crédit d&apos;impôt.
           </p>
           <div className="flex gap-4">
             <Link
@@ -194,23 +196,23 @@ export default function CityPage({ params }: PageProps) {
               <ul className="space-y-3 list-disc pl-5">
                 <li><strong>Tonte de pelouse :</strong> Tonte régulière, scarification, regarnissage et entretien du gazon.</li>
                 <li><strong>Taille de haies :</strong> Taille de haies, arbustes, rosiers et arbres fruitiers.</li>
-                <li><strong>Élagage :</strong> Intervention sécurisée sur vos arbres, même difficiles d'accès.</li>
+                <li><strong>Élagage :</strong> Intervention sécurisée sur vos arbres, même difficiles d&apos;accès.</li>
                 <li><strong>Création de jardin :</strong> Conception paysagère, création de massifs fleuris, plantations.</li>
                 <li><strong>Pose de clôtures :</strong> Installation de clôtures, grillages, palissades et portails.</li>
                 <li><strong>Débroussaillage :</strong> Nettoyage de terrains, évacuation des déchets verts.</li>
               </ul>
               <p className="mt-4 p-4 bg-accent/10 rounded-lg border-l-4 border-accent text-primary-dark font-medium">
-                Bénéficiez de 50% de réduction d'impôt sur nos prestations d'entretien de jardin (Service à la Personne).
+                Bénéficiez de 50% de réduction d&apos;impôt sur nos prestations d&apos;entretien de jardin (Service à la Personne).
               </p>
             </div>
-            
+
             <div className="mt-8">
               <Link href="/contact" className="text-primary font-bold hover:text-accent underline">
                 Nous contacter pour une intervention à {city.name} →
               </Link>
             </div>
           </div>
-          
+
           <div className="relative h-80 md:h-96 rounded-2xl overflow-hidden shadow-xl">
              <Image
                 src="/images/services_personne.webp"
@@ -233,8 +235,8 @@ export default function CityPage({ params }: PageProps) {
               .filter(c => c.slug !== city.slug)
               .slice(0, 5)
               .map(c => (
-                <Link 
-                  key={c.slug} 
+                <Link
+                  key={c.slug}
                   href={`/zones/${dept.slug}/${c.slug}`}
                   className="text-gray-600 hover:text-primary underline"
                 >
