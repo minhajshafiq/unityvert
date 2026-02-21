@@ -3,6 +3,8 @@ import GalerieContent from '@/components/GalerieContent'
 import CTASection from '@/components/CTASection'
 import { getGalleryPhotos, getCategories } from '@/lib/sanity'
 
+export const runtime = 'edge'
+
 export const metadata: Metadata = {
   title: 'Galerie photos | Nos réalisations de jardinage',
   description:

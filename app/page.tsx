@@ -7,6 +7,8 @@ import ServiceArea from '@/components/ServiceArea'
 import CTASection from '@/components/CTASection'
 import { getHeroData, getFeaturedWorks } from '@/lib/sanity'
 
+export const runtime = 'edge'
+
 export default async function Home() {
   // Récupérer les données depuis Sanity
   const [heroData, featuredWorks] = await Promise.all([
