@@ -7,18 +7,6 @@ export default {
   type: 'document',
   fields: [
     {
-      name: 'title',
-      title: 'Titre',
-      type: 'string',
-      description: 'Titre principal du hero (optionnel)',
-    },
-    {
-      name: 'subtitle',
-      title: 'Sous-titre',
-      type: 'string',
-      description: 'Sous-titre du hero (optionnel)',
-    },
-    {
       name: 'image',
       title: 'Image de fond',
       type: 'image',
@@ -44,12 +32,11 @@ export default {
   ],
   preview: {
     select: {
-      title: 'title',
       media: 'image',
     },
-    prepare({ title, media }: any) {
+    prepare({ media }: any) {
       return {
-        title: title || 'Hero - Page d\'accueil',
+        title: 'Hero - Page d\'accueil',
         media,
       }
     },

@@ -10,8 +10,8 @@ export const client = createClient({
   perspective: 'published',
 })
 
-// Options de fetch pour désactiver le cache Next.js
-const fetchOptions = { next: { revalidate: 60 } } // Revalide toutes les 60 secondes
+// Options de fetch - pas de cache pour Cloudflare Pages
+const fetchOptions = { cache: 'no-store' as const } // Données fraîches à chaque requête
 
 // Helper pour générer les URLs d'images optimisées
 const builder = createImageUrlBuilder(client)

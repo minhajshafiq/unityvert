@@ -20,17 +20,20 @@ export default function MentionsLegalesContent() {
             <p>
               Le site unityvert.fr est edite par :<br />
               <strong>Unity Vert</strong><br />
+              SAS au capital de 1 000 €<br />
               17 rue Bethisy<br />
               93130 Noisy-le-Sec<br />
               France
             </p>
             <p>
-              Telephone : 07 43 45 53 49 / 06 59 26 85 02<br />
-              Email : unityvert@gmail.com
+              Immatriculée au RCS de Bobigny sous le numéro 948 908 389<br />
+              SIRET : 948 908 389 00026<br />
+              Numéro de TVA intracommunautaire : FR25948908389<br />
             </p>
             <p>
-              SIRET : [Numero SIRET a completer]<br />
-              Responsable de la publication : [Nom du responsable]
+              Telephone : 07 43 45 53 49 / 06 59 26 85 02<br />
+              Email : unityvert@gmail.com<br />
+              Responsable de la publication : Azhar UDDIN
             </p>
           </ScrollAnimator>
 
@@ -40,10 +43,10 @@ export default function MentionsLegalesContent() {
             </h2>
             <p>
               Ce site est heberge par :<br />
-              Vercel Inc.<br />
-              340 S Lemon Ave #4133<br />
-              Walnut, CA 91789, USA<br />
-              https://vercel.com
+              Cloudflare, Inc.<br />
+              101 Townsend St<br />
+              San Francisco, CA 94107, USA<br />
+              https://www.cloudflare.com
             </p>
           </ScrollAnimator>
 
@@ -65,15 +68,32 @@ export default function MentionsLegalesContent() {
           </ScrollAnimator>
 
           <ScrollAnimator animation="fade-up" delay={250}>
+            <h2 className="text-2xl font-semibold text-text mt-8 mb-4">
+              4. Médiation de la consommation
+            </h2>
+            <p>
+              Conformément aux articles L.616-1 et R.616-1 du Code de la consommation, nous proposons un dispositif de médiation de la consommation. 
+              En cas de litige, vous pouvez déposer votre réclamation sur le site du médiateur :
+            </p>
+            <p>
+              <em>[Nom du Médiateur choisi, ex: CM2C]</em><br />
+              <em>[Adresse du site web du médiateur]</em>
+            </p>
+            <p className="text-sm italic">
+              (Si vous n'avez pas encore désigné de médiateur, c'est une obligation légale pour les artisans travaillant avec des particuliers. Vous pouvez adhérer au CM2C ou CNPM par exemple pour environ 50€/an).
+            </p>
+          </ScrollAnimator>
+
+          <ScrollAnimator animation="fade-up" delay={300}>
             <h2
               id="confidentialite"
               className="text-2xl font-semibold text-text mt-8 mb-4"
             >
-              4. Politique de confidentialite
+              5. Politique de confidentialite
             </h2>
 
             <h3 className="text-xl font-semibold text-text mt-6 mb-3">
-              4.1 Collecte des donnees
+              5.1 Collecte des donnees
             </h3>
             <p>
               Les donnees personnelles collectees via le formulaire de contact sont :
@@ -90,7 +110,7 @@ export default function MentionsLegalesContent() {
             </p>
 
             <h3 className="text-xl font-semibold text-text mt-6 mb-3">
-              4.2 Utilisation des donnees
+              5.2 Utilisation des donnees
             </h3>
             <p>
               Vos donnees personnelles sont utilisees exclusivement pour :
@@ -105,7 +125,7 @@ export default function MentionsLegalesContent() {
             </p>
 
             <h3 className="text-xl font-semibold text-text mt-6 mb-3">
-              4.3 Conservation des donnees
+              5.3 Conservation des donnees
             </h3>
             <p>
               Vos donnees personnelles sont conservees pendant une duree de 3 ans a
@@ -114,7 +134,7 @@ export default function MentionsLegalesContent() {
             </p>
 
             <h3 className="text-xl font-semibold text-text mt-6 mb-3">
-              4.4 Vos droits
+              5.4 Vos droits
             </h3>
             <p>
               Conformement au Reglement General sur la Protection des Donnees
@@ -133,9 +153,9 @@ export default function MentionsLegalesContent() {
             </p>
           </ScrollAnimator>
 
-          <ScrollAnimator animation="fade-up" delay={300}>
+          <ScrollAnimator animation="fade-up" delay={350}>
             <h2 className="text-2xl font-semibold text-text mt-8 mb-4">
-              5. Cookies
+              6. Cookies
             </h2>
             <p>
               Ce site utilise des cookies techniques necessaires a son bon
@@ -154,9 +174,9 @@ export default function MentionsLegalesContent() {
             </ul>
           </ScrollAnimator>
 
-          <ScrollAnimator animation="fade-up" delay={350}>
+          <ScrollAnimator animation="fade-up" delay={400}>
             <h2 className="text-2xl font-semibold text-text mt-8 mb-4">
-              6. Limitation de responsabilite
+              7. Limitation de responsabilite
             </h2>
             <p>
               Unity Vert s'efforce d'assurer l'exactitude et la mise a jour des
@@ -171,9 +191,9 @@ export default function MentionsLegalesContent() {
             </p>
           </ScrollAnimator>
 
-          <ScrollAnimator animation="fade-up" delay={400}>
+          <ScrollAnimator animation="fade-up" delay={450}>
             <h2 className="text-2xl font-semibold text-text mt-8 mb-4">
-              7. Droit applicable
+              8. Droit applicable
             </h2>
             <p>
               Les presentes mentions legales sont soumises au droit francais. En
